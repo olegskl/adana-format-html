@@ -1,0 +1,24 @@
+.breadcrumbs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.breadcrumb {
+  position: relative;
+  color: var(--textColor);
+  margin: 0 0.2rem 0 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.breadcrumb:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb::before {
+  position: absolute;
+  left: -0.6rem;
+  color: var(--textSubColor);
+  content: "/";
+}

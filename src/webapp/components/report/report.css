@@ -1,0 +1,13 @@
+@import "../header/header";
+@import "../stats/stats";
+@import "../breadcrumbs/breadcrumbs";
+@import "../filebox/filebox";
+@import "../footer/footer";
+
+.report {
+  padding: 0.5rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}

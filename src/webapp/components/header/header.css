@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 55rem;
+  margin: 0.5rem;
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+.breadcrumb-title {
+  margin-right: 0.3rem;
+}

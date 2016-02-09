@@ -1,0 +1,45 @@
+.filelist-item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: center;
+  flex: 0 1 1.7rem;
+  line-height: 1rem;
+  border-top: solid 1px var(--textSubColor);
+  color: var(--textColor);
+  text-decoration: none;
+}
+
+.filelist-item:hover {
+  background-color: #bdc3c7;
+}
+
+%filelist-item__cell {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+
+.filelist-item__name {
+  @extend %filelist-item__cell;
+  flex: 1;
+}
+
+.filelist-item__metric {
+  @extend %filelist-item__cell;
+  display: flex;
+  flex: 0 0 9rem;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  text-align: right;
+  border-left: solid 1px var(--textSubColor);
+}
+
+.filelist-item__metric__percentage {
+  flex: 1;
+}
+
+.filelist-item__metric__counts {
+  flex: 1;
+  color: var(--textSubColor);
+}

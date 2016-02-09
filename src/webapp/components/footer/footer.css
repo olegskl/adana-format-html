@@ -1,0 +1,7 @@
+.footer {
+  margin: 0.5rem;
+  white-space: pre-wrap;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}

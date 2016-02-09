@@ -1,0 +1,23 @@
+.stats {
+  width: 55rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat {
+  display: flex;
+  flex-direction: row;
+  line-height: 1.5rem;
+}
+
+.tagPercentage {
+  font-weight: bold;
+  padding: 0 0.3rem;
+}
+
+.tagCount {
+  color: var(--textSubColor);
+  line-height: 1.5rem;
+}

@@ -1,0 +1,51 @@
+.file {
+  margin: 0.5rem;
+  width: 55rem;
+  display: flex;
+  font-size: 0.8rem;
+  flex-direction: column;
+  align-items: stretch;
+  border: solid 1px var(--textSubColor);
+}
+
+.line {
+  display: flex;
+}
+
+.line-number {
+  text-align: right;
+  flex: 0 0 2.5rem;
+  padding-right: 0.5rem;
+  border-right: solid 1px var(--textSubColor);
+  margin: 0;
+}
+
+.line-count {
+  flex: 0 0 3.5rem;
+  padding: 0 0.5rem;
+  border-right: solid 1px var(--textSubColor);
+  margin: 0;
+  text-align: right;
+  background-color: rgba(189, 195, 199, 0.3);
+}
+
+.line-count--passed {
+  @extend .line-count;
+  background-color: rgba(39, 174, 96, 0.3);
+}
+
+.line-count--not-passed {
+  @extend .line-count;
+  background-color: rgba(231, 76, 60, 0.4);
+}
+
+.line-text {
+  flex: 1;
+  padding-left: 0.5rem;
+  margin: 0;
+}
+
+.line-text--not-passed {
+  @extend .line-text;
+  background-color: rgba(231, 76, 60, 0.3);
+}
