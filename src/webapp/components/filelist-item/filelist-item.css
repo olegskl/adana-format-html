@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: stretch;
   align-content: center;
-  flex: 0 1 1.7rem;
+  flex: 0 1 2rem;
   line-height: 1rem;
   border-top: solid 1px var(--textSubColor);
   color: var(--textColor);
