@@ -5,6 +5,7 @@ import filelistItem from '../filelist-item/filelist-item';
 function generateFilelist(tree) {
   return Object
     .keys(tree.contents)
+    .sort()
     .map(name => filelistItem(tree.contents[name]));
 }
 
