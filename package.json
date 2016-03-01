@@ -2,7 +2,7 @@
   "name": "adana-format-html",
   "version": "0.0.1",
   "description": "Adana format html",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "GULP_ENV=dev gulp build",
     "dev-live": "GULP_ENV=dev-live gulp serve",

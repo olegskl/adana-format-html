@@ -46,4 +46,4 @@ src.scriptsMain = `${src.root}/report.js`;
 // Destination files and folders
 // --------------------
 
-dest.root = 'lib';
+dest.root = 'dist';
