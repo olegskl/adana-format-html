@@ -3,7 +3,7 @@ import h from 'virtual-dom/h';
 function generateLine(line, index) {
   const modifier = line.count ? 'passed' : 'not-passed';
   const lineCountClassName = line.covered ? `line-count--${modifier}` : 'line-count';
-  const lineTextClassName = line.count || !line.covered ? `line-text` : 'line-text--not-passed';
+  const lineTextClassName = line.count || !line.covered ? 'line-text' : 'line-text--not-passed';
   return h('div', {className: 'line'}, [
     h('pre', {className: 'line-number'}, [index + 1]),
     h('pre', {className: lineCountClassName}, [line.covered ? line.count : '']),

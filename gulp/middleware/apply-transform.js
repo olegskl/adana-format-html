@@ -15,11 +15,13 @@ export default function createMiddleware() {
     const {pathname, query} = url.parse(req.url);
 
     if (req.method !== 'GET' && req.method !== 'HEAD') {
-      return next();
+      next();
+      return;
     }
 
     if (pathname !== '/' && pathname !== '/report.html') {
-      return next();
+      next();
+      return;
     }
 
     const {fixture} = querystring.parse(query);
