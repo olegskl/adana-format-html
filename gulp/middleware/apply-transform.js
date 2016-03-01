@@ -9,7 +9,7 @@ import querystring from 'querystring';
 const fixturesPath = path.resolve(__dirname, '../../fixtures');
 
 export default function createMiddleware() {
-  const adanaFormatHtml = require('../../lib').default;
+  const adanaFormatHtml = require('../../dist').default;
 
   return function applyTransformMiddleware(req, res, next) {
     const {pathname, query} = url.parse(req.url);
