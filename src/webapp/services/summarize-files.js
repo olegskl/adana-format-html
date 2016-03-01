@@ -19,7 +19,7 @@ export default function summarizeFiles(files) {
     .keys(summarizedCounts)
     .reduce((result, tagName) => {
       const {passed, total} = summarizedCounts[tagName];
-      result[tagName].value = total ? passed / total : 0;
+      result[tagName].value = total ? passed / total : 1;
       return result;
     }, summarizedCounts);
 }
