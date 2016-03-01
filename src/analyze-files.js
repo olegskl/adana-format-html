@@ -1,12 +1,8 @@
 /* eslint-disable no-sync */
 import fs from 'fs';
 import path from 'path';
-import {
-  // lines,
-  metrics,
-  tags
-} from 'adana-analyze';
-import lines from './lines';
+import {metrics, tags} from 'adana-analyze';
+import {altLines, extendWithLines} from './alt-lines'; // FIXME temporary solution
 
 const requiredTags = [
   'statement',
@@ -22,6 +18,9 @@ function normalizePath(pathString) {
 
 function computeMetrics(coverageLocations) {
   const selectedTags = tags(coverageLocations, requiredTags);
+
+  extendWithLines(selectedTags, coverageLocations); // FIXME temporary solution
+
   return Object
     .keys(selectedTags)
     .reduce((result, tagName) => {
@@ -35,7 +34,7 @@ function analyzeFile(fileCoverage) {
     name: path.basename(fileCoverage.path),
     path: normalizePath(fileCoverage.path),
     contents: fs.readFileSync(fileCoverage.path, 'utf8'),
-    lines: lines(fileCoverage.locations),
+    lines: altLines(fileCoverage.locations), // FIXME temporary solution
     metrics: computeMetrics(fileCoverage.locations)
   };
 }
