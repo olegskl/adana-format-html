@@ -1,7 +1,12 @@
 /* eslint-disable no-sync */
 import fs from 'fs';
 import path from 'path';
-import {lines, metrics, tags} from 'adana-analyze';
+import {
+  // lines,
+  metrics,
+  tags
+} from 'adana-analyze';
+import lines from './lines';
 
 const requiredTags = [
   'statement',
