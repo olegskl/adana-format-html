@@ -21,7 +21,6 @@ export const babelrc = {
 
 const gulpEnv = process.env.GULP_ENV || 'dist'; // eslint-disable-line no-process-env, no-undef
 
-const isDev = gulpEnv.includes('dev');
 const isDist = gulpEnv.includes('dist');
 const isLive = gulpEnv.includes('live');
 

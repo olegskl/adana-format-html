@@ -25,21 +25,11 @@ function computeMetrics(coverageLocations) {
     }, {});
 }
 
-// function findNotCovered({locations}) {
-//   return locations.reduce((result, location) => {
-//     if (!location.count) {
-//       result.push(location);
-//     }
-//     return result;
-//   }, []);
-// }
-
 function analyzeFile(fileCoverage) {
   return {
     name: path.basename(fileCoverage.path),
     path: normalizePath(fileCoverage.path),
     contents: fs.readFileSync(fileCoverage.path, 'utf8'),
-    // notCovered: findNotCovered(fileCoverage),
     lines: lines(fileCoverage.locations),
     metrics: computeMetrics(fileCoverage.locations)
   };
