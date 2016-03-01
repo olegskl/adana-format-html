@@ -16,10 +16,11 @@ function normalizePath(pathString) {
 }
 
 function computeMetrics(coverageLocations) {
+  const selectedTags = tags(coverageLocations, requiredTags);
   return Object
-    .entries(tags(coverageLocations, requiredTags))
-    .reduce((result, [tagName, tagData]) => {
-      result[tagName] = metrics(tagData);
+    .keys(selectedTags)
+    .reduce((result, tagName) => {
+      result[tagName] = metrics(selectedTags[tagName]);
       return result;
     }, {});
 }
@@ -61,7 +62,9 @@ function findCommonPath(splitFilePaths = []) {
 }
 
 export default function analyzeFiles(filesCoverage) {
-  const files = Object.values(filesCoverage).map(analyzeFile);
+  const files = Object.keys(filesCoverage).map(filePath => {
+    return analyzeFile(filesCoverage[filePath]);
+  });
   const splitFullFilePaths = files.map(file => file.path.split('/'));
   const commonPath = findCommonPath(splitFullFilePaths).join('/');
   return files.map(file => {

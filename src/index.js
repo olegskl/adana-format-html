@@ -3,7 +3,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import 'babel-polyfill';
 import analyzeFiles from './analyze-files';
 
 function generateReport(coverage, {

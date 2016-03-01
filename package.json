@@ -15,7 +15,6 @@
   "license": "MIT",
   "dependencies": {
     "adana-analyze": "^0.1.1",
-    "babel-polyfill": "^6.5.0",
     "postcss-custom-properties": "^5.0.0",
     "redux": "^3.3.1",
     "virtual-dom": "^2.1.1"
