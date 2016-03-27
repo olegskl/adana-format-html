@@ -8,11 +8,7 @@ export const src = {};
 export const dest = {};
 export const browsers = ['last 2 versions'];
 export const babelrc = {
-  presets: ['es2015'],
-  plugins: [
-    'transform-function-bind',
-    'transform-es2015-destructuring'
-  ]
+  presets: ['es2015']
 };
 
 //
