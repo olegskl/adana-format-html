@@ -35,7 +35,8 @@ function analyzeFile(fileCoverage) {
     path: normalizePath(fileCoverage.path),
     contents: fs.readFileSync(fileCoverage.path, 'utf8'),
     lines: altLines(fileCoverage.locations), // FIXME temporary solution
-    metrics: computeMetrics(fileCoverage.locations)
+    metrics: computeMetrics(fileCoverage.locations),
+    branches: tags(fileCoverage.locations).branch
   };
 }
 

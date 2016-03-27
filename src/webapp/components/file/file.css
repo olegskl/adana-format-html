@@ -1,51 +1,108 @@
+@import 'codemirror/lib/codemirror';
+
 .file {
+  flex: 1;
   margin: 0.5rem;
   width: 55rem;
-  display: flex;
-  font-size: 0.8rem;
-  flex-direction: column;
-  align-items: stretch;
   border: solid 1px var(--textSubColor);
 }
 
-.line {
-  display: flex;
+.CodeMirror {
+  height: 100%;
 }
 
-.line-number {
-  text-align: right;
-  flex: 0 0 2.5rem;
-  padding-right: 0.5rem;
-  border-right: solid 1px var(--textSubColor);
-  margin: 0;
+.CodeMirror-linenumbers {
+  border-right: 1px solid #ddd;
 }
 
-.line-count {
-  flex: 0 0 3.5rem;
-  padding: 0 0.5rem;
-  border-right: solid 1px var(--textSubColor);
-  margin: 0;
-  text-align: right;
-  background-color: rgba(189, 195, 199, 0.3);
+.file .CodeMirror-linenumber {
+  padding: 0 0.4rem;
+  color: #999;
 }
 
-.line-count--passed {
-  @extend .line-count;
-  background-color: rgba(39, 174, 96, 0.3);
+.gutter-line-count {
+  @extend .CodeMirror-linenumber;
 }
 
-.line-count--not-passed {
-  @extend .line-count;
-  background-color: rgba(231, 76, 60, 0.4);
+.gutter-line-count-elt--covered {
+  @extend .CodeMirror-linenumber;
+  color: #555;
+  border-right: solid 1px rgba(46, 204, 113, 1);
+  background-color: rgba(46, 204, 113, 0.3);
 }
 
-.line-text {
-  flex: 1;
-  padding-left: 0.5rem;
-  margin: 0;
-}
-
-.line-text--not-passed {
-  @extend .line-text;
+.gutter-line-count-elt--not-covered {
+  @extend .CodeMirror-linenumber;
+  color: #555;
+  border-right: solid 1px rgba(231, 76, 60, 1);
   background-color: rgba(231, 76, 60, 0.3);
+}
+
+/* -------------------- */
+
+.branch-not-taken {
+  position: relative;
+  background: rgba(241, 196, 15, 0.5);
+}
+
+.branch-not-taken:hover:before {
+  content: 'Branch was not taken';
+  position: absolute;
+  left: 0;
+  top: -1.8rem;
+  padding: 0.2rem 1rem;
+  background: rgba(241, 196, 15, 0.9);
+  color: black;
+  border-radius: 0.7rem 0.7rem 0.7rem 0;
+}
+
+.branch-not-taken:hover:after {
+  content: '';
+  position: absolute;
+  top: -0.7rem;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: solid 0.4rem transparent;
+  border-left-color: rgba(241, 196, 15, 1.0);
+}
+
+/* -------------------- */
+
+.else-branch-not-taken {
+  position: relative;
+  display: inline-block;
+  margin-left: 3px;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background: rgba(241, 196, 15, 0.9);
+}
+
+.else-branch-not-taken:hover:before {
+  content: 'Else branch was not taken';
+  position: absolute;
+  left: 0;
+  top: -1.8rem;
+  padding: 0.2rem 1rem;
+  background: rgba(241, 196, 15, 0.9);
+  color: black;
+  border-radius: 0.7rem 0.7rem 0.7rem 0;
+}
+
+.else-branch-not-taken:hover:after {
+  content: '';
+  position: absolute;
+  top: -0.7rem;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: solid 0.4rem transparent;
+  border-left-color: rgba(241, 196, 15, 1.0);
+}
+
+/* -------------------- */
+
+.line-not-covered {
+  background-color: rgba(231, 76, 60, 0.1);
 }

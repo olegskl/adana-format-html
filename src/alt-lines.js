@@ -14,16 +14,17 @@ export function altLines(locations) {
   locations
     .filter(selector)
     .forEach(entry => {
-      const line = entry.loc.start.line;
-      if (index.hasOwnProperty(line)) {
-        index[line] = Math.max(index[line], entry.count);
-      } else {
-        index[line] = entry.count;
-      }
+      [entry.loc.start.line, entry.loc.end.line].forEach(line => {
+        if (index.hasOwnProperty(line)) {
+          index[line] = Math.max(index[line], entry.count);
+        } else {
+          index[line] = entry.count;
+        }
+      });
     });
   return Object.keys(index).map(line => {
     return {
-      line,
+      line: parseInt(line, 10),
       passed: index[line] > 0,
       count: index[line]
     };
