@@ -6,7 +6,7 @@ import url from 'url';
 import etag from 'etag';
 import querystring from 'querystring';
 
-const fixturesPath = path.resolve(__dirname, '../../fixtures');
+const fixturesPath = path.resolve(__dirname, '../../coverage');
 
 export default function createMiddleware() {
   const adanaFormatHtml = require('../../dist').default;
@@ -25,7 +25,7 @@ export default function createMiddleware() {
     }
 
     const {fixture} = querystring.parse(query);
-    const fixtureFileName = `${fixture || 'default'}.json`;
+    const fixtureFileName = `${fixture || 'coverage'}.json`;
     const fixtureFilePath = path.join(fixturesPath, fixtureFileName);
 
     fs.readFile(fixtureFilePath, 'utf8', (fixtureError, fixtureContents) => {

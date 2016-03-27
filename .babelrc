@@ -1,5 +1,12 @@
 {
   "presets": [
     "es2015"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["transform-adana-alt", {"only": ["src/*.js","src/**/*.js"]}]
+      ]
+    }
+  }
 }

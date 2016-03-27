@@ -1,3 +1,6 @@
 {
-  "extends": "meetic"
+  "extends": "meetic",
+  "env": {
+    "node": true
+  }
 }

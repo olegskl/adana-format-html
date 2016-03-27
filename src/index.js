@@ -1,4 +1,3 @@
-/* eslint-env node */
 /* eslint-disable no-sync */
 
 import fs from 'fs';
