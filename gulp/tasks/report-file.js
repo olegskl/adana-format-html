@@ -6,13 +6,17 @@
 import gulp from 'gulp';
 import gulpIf from 'gulp-if';
 import gulpPlumber from 'gulp-plumber';
-import gulpUglify from 'gulp-uglify';
 import gulpCssmin from 'gulp-cssmin';
 import gulpHtmlmin from 'gulp-htmlmin';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
+import gulpSourcemaps from 'gulp-sourcemaps';
+import rollupStream from 'rollup-stream';
+import vinylBuffer from 'vinyl-buffer';
+import vinylSourceStream from 'vinyl-source-stream';
+import rollupPluginBabel from 'rollup-plugin-babel';
+import rollupPluginNodeResolve from 'rollup-plugin-node-resolve';
+import rollupPluginCommonjs from 'rollup-plugin-commonjs';
+import rollupPluginReplace from 'rollup-plugin-replace';
+import rollupPluginUglify from 'rollup-plugin-uglify';
 import gulpPostcss from 'gulp-postcss';
 import postcssCustomProperties from 'postcss-custom-properties';
 import autoprefixer from 'autoprefixer';
@@ -21,7 +25,7 @@ import postcssImport from 'postcss-import';
 
 import notify from '../helpers/notify';
 import {inlineScripts, inlineStyles} from '../helpers/inline';
-import {env, src, dest, babelrc, browsers} from '../config';
+import {env, src, dest, browsers} from '../config';
 
 /**
  * Returns a processed stream of critical styles.
@@ -45,13 +49,40 @@ function streamCriticalStyles() {
  * @return {Stream} Processed critical scripts stream.
  */
 function streamCriticalScripts() {
-  return browserify(src.scriptsMain)
-    .transform(babelify.configure(babelrc))
-    .bundle()
+  const nodeEnv = JSON.stringify(process.env.NODE_ENV); // eslint-disable-line no-process-env
+  const rollupOptions = {
+    entry: src.scriptsMain,
+    sourceMap: env.needsSourcemaps,
+    plugins: [
+      rollupPluginNodeResolve({
+        browser: true,
+        jsnext: true,
+        main: true,
+        preferBuiltins: false
+      }),
+      rollupPluginCommonjs(),
+      rollupPluginReplace({
+        'process.env.NODE_ENV': nodeEnv
+      }),
+      rollupPluginBabel({
+        babelrc: false,
+        presets: ['es2015-rollup'],
+        exclude: 'node_modules/**'
+      })
+    ]
+  };
+
+  if (env.needsMinification) {
+    rollupOptions.plugins.push(rollupPluginUglify());
+  }
+
+  return rollupStream(rollupOptions)
     .on('error', notify.andEndStream)
-    .pipe(source('inline.js'))
-    .pipe(buffer())
-    .pipe(gulpIf(env.needsMinification, gulpUglify()));
+    .pipe(vinylSourceStream('inline.js'))
+    .pipe(gulpPlumber(notify.andEndStream))
+    .pipe(vinylBuffer())
+    .pipe(gulpIf(env.needsSourcemaps, gulpSourcemaps.init({loadMaps: true})))
+    .pipe(gulpIf(env.needsSourcemaps, gulpSourcemaps.write()));
 }
 
 /**

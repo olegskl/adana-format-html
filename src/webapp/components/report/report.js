@@ -6,7 +6,7 @@ import footer from '../footer/footer';
 import filebox from '../filebox/filebox';
 
 export default function report(state) {
-  const currentPath = state.location.path || [];
+  const currentPath = state.location.path;
   const currentSubtree = findSubtree(state.files, currentPath);
   return h('div', {
     className: 'report'
