@@ -36,7 +36,7 @@
 
 .line-count--not-passed {
   @extend .line-count;
-  background-color: rgba(231, 76, 60, 0.4);
+  background-color: rgba(231, 76, 60, 0.3);
 }
 
 .line-text {
@@ -47,7 +47,8 @@
 
 .line-text--not-passed {
   @extend .line-text;
-  background-color: rgba(231, 76, 60, 0.3);
+  background-color: rgba(231, 76, 60, 0.05);
+  color: rgba(231, 76, 60, 1);
 }
 
 .line-text--not-covered {
