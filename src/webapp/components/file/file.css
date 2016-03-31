@@ -49,3 +49,8 @@
   @extend .line-text;
   background-color: rgba(231, 76, 60, 0.3);
 }
+
+.line-text--not-covered {
+  @extend .line-text;
+  color: var(--textSubColor);
+}

@@ -1,14 +1,25 @@
 import h from 'virtual-dom/h';
 
+function generateLineCountClassName(line) {
+  if (!line.covered) { return 'line-count'; }
+  return line.count ? 'line-count--passed' : 'line-count--not-passed';
+}
+
+function generateLineTextClassName(line) {
+  if (!line.covered) { return 'line-text--not-covered'; }
+  return line.count ? 'line-text' : 'line-text--not-passed';
+}
+
 function generateLine(line, index) {
-  const modifier = line.count ? 'passed' : 'not-passed';
-  const lineCountClassName = line.covered ? `line-count--${modifier}` : 'line-count';
-  const lineTextClassName = line.count || !line.covered ? 'line-text' : 'line-text--not-passed';
   return h('div', {className: 'line'}, [
-    h('pre', {className: 'line-number'}, [index + 1]),
-    h('pre', {className: lineCountClassName}, [line.covered ? line.count : '']),
     h('pre', {
-      className: lineTextClassName,
+      className: 'line-number'
+    }, [index + 1]),
+    h('pre', {
+      className: generateLineCountClassName(line)
+    }, [line.covered ? line.count : '']),
+    h('pre', {
+      className: generateLineTextClassName(line),
       innerHTML: line.text
     }, [])
   ]);
