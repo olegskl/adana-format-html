@@ -7,9 +7,6 @@ export const env = {};
 export const src = {};
 export const dest = {};
 export const browsers = ['last 2 versions'];
-export const babelrc = {
-  presets: ['es2015']
-};
 
 //
 // Environment config
@@ -20,6 +17,7 @@ const gulpEnv = process.env.GULP_ENV || 'dist'; // eslint-disable-line no-proces
 const isDist = gulpEnv.indexOf('dist') !== -1;
 const isLive = gulpEnv.indexOf('live') !== -1;
 
+env.needsSourcemaps = isLive;
 env.needsLivereload = isLive;
 env.needsMinification = isDist;
 

@@ -1,10 +1,8 @@
-import url from 'url';
+import parse from 'url-parse';
 
 export default function parseUrl(urlString) {
-  const hash = url.parse(urlString).hash || '';
-  const {pathname, query} = url.parse(hash.replace(/^#\/?/, ''), true);
-  return {
-    path: pathname ? pathname.split('/') : '',
-    query
-  };
+  const {hash} = parse(urlString);
+  const {pathname, query} = parse(hash.replace(/^#\/?/, '/'), true);
+  const path = pathname === '/' ? [] : pathname.split('/').slice(1);
+  return {path, query};
 }
