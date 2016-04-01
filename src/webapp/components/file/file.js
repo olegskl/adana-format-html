@@ -10,18 +10,33 @@ function generateLineTextClassName(line) {
   return line.count ? 'line-text' : 'line-text--not-passed';
 }
 
-function generateLine(line, index) {
-  return h('div', {className: 'line'}, [
-    h('pre', {
-      className: 'line-number'
-    }, [index + 1]),
-    h('pre', {
-      className: generateLineCountClassName(line)
-    }, [line.covered ? line.count : '']),
-    h('pre', {
-      className: generateLineTextClassName(line),
-      innerHTML: line.text
-    }, [])
+function lineNumberGutter(lines) {
+  return h('div', {className: 'gutter-line-number'}, [
+    lines.map((line, index) => {
+      const className = 'line-number';
+      const textContent = index + 1;
+      return h('pre', {className}, [textContent]);
+    })
+  ]);
+}
+
+function passCountGutter(lines) {
+  return h('div', {className: 'gutter-pass-count'}, [
+    lines.map(line => {
+      const className = generateLineCountClassName(line);
+      const textContent = line.covered ? line.count : '';
+      return h('pre', {className}, [textContent]);
+    })
+  ]);
+}
+
+function codeGutter(lines) {
+  return h('div', {className: 'gutter-code'}, [
+    lines.map(line => {
+      const className = generateLineTextClassName(line);
+      const textContent = line.text;
+      return h('pre', {className}, [textContent]);
+    })
   ]);
 }
 
@@ -36,5 +51,9 @@ export default function file(node) {
   });
   return h('div', {
     className: 'file'
-  }, lines.map(generateLine));
+  }, [
+    lineNumberGutter(lines),
+    passCountGutter(lines),
+    codeGutter(lines)
+  ]);
 }

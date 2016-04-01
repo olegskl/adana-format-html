@@ -3,25 +3,37 @@
   width: 55rem;
   display: flex;
   font-size: 0.8rem;
-  flex-direction: column;
   align-items: stretch;
   border: solid 1px var(--textSubColor);
 }
 
 .line {
-  display: flex;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+.gutter-line-number {
+  flex: 0 0 2.5rem;
+}
+
+.gutter-pass-count {
+  flex: 0 0 3.5rem;
+}
+
+.gutter-code {
+  flex: 1;
 }
 
 .line-number {
+  @extend .line;
   text-align: right;
-  flex: 0 0 2.5rem;
   padding-right: 0.5rem;
   border-right: solid 1px var(--textSubColor);
   margin: 0;
 }
 
 .line-count {
-  flex: 0 0 3.5rem;
+  @extend .line;
   padding: 0 0.5rem;
   border-right: solid 1px var(--textSubColor);
   margin: 0;
@@ -40,7 +52,7 @@
 }
 
 .line-text {
-  flex: 1;
+  @extend .line;
   padding-left: 0.5rem;
   margin: 0;
 }
