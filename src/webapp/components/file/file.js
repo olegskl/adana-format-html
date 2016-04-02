@@ -1,16 +1,42 @@
 import h from 'virtual-dom/h';
 
-function generateLine(line, index) {
-  const modifier = line.count ? 'passed' : 'not-passed';
-  const lineCountClassName = line.covered ? `line-count--${modifier}` : 'line-count';
-  const lineTextClassName = line.count || !line.covered ? 'line-text' : 'line-text--not-passed';
-  return h('div', {className: 'line'}, [
-    h('pre', {className: 'line-number'}, [index + 1]),
-    h('pre', {className: lineCountClassName}, [line.covered ? line.count : '']),
-    h('pre', {
-      className: lineTextClassName,
-      innerHTML: line.text
-    }, [])
+function generateLineCountClassName(line) {
+  if (!line.covered) { return 'line-count'; }
+  return line.count ? 'line-count--passed' : 'line-count--not-passed';
+}
+
+function generateLineTextClassName(line) {
+  if (!line.covered) { return 'line-text--not-covered'; }
+  return line.count ? 'line-text' : 'line-text--not-passed';
+}
+
+function lineNumberGutter(lines) {
+  return h('div', {className: 'gutter-line-number'}, [
+    lines.map((line, index) => {
+      const className = 'line-number';
+      const textContent = index + 1;
+      return h('pre', {className}, [textContent]);
+    })
+  ]);
+}
+
+function passCountGutter(lines) {
+  return h('div', {className: 'gutter-pass-count'}, [
+    lines.map(line => {
+      const className = generateLineCountClassName(line);
+      const textContent = line.covered ? line.count : '';
+      return h('pre', {className}, [textContent]);
+    })
+  ]);
+}
+
+function codeGutter(lines) {
+  return h('div', {className: 'gutter-code'}, [
+    lines.map(line => {
+      const className = generateLineTextClassName(line);
+      const textContent = line.text;
+      return h('pre', {className}, [textContent]);
+    })
   ]);
 }
 
@@ -25,5 +51,9 @@ export default function file(node) {
   });
   return h('div', {
     className: 'file'
-  }, lines.map(generateLine));
+  }, [
+    lineNumberGutter(lines),
+    passCountGutter(lines),
+    codeGutter(lines)
+  ]);
 }
