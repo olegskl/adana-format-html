@@ -10,6 +10,7 @@
 .line {
   height: 1rem;
   line-height: 1rem;
+  overflow: visible;
 }
 
 .gutter-line-number {
@@ -22,6 +23,7 @@
 
 .gutter-code {
   flex: 1;
+  overflow: auto;
 }
 
 .line-number {
